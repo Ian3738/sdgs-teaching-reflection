@@ -75,7 +75,10 @@ a:hover{color:var(--red)}
 .ph-in{max-width:var(--maxw); margin:0 auto; padding:clamp(40px,6vw,84px) var(--pad) clamp(36px,5vw,64px);
   display:grid; grid-template-columns:minmax(0,1fr) minmax(0,.92fr); gap:clamp(24px,5vw,64px); align-items:center}
 @media(max-width:1000px){.ph-in{grid-template-columns:1fr; gap:28px}}
-.kicker{font-size:12px; font-weight:800; letter-spacing:.34em; color:var(--red); margin-bottom:20px}
+.kicker{font-size:12px; font-weight:800; letter-spacing:.34em; color:var(--red); margin-bottom:20px;
+  max-width:100%; overflow-wrap:break-word}
+/* 補助單位名稱較長，窄螢幕收斂字距以免撐破版面 */
+@media(max-width:560px){.kicker{letter-spacing:.16em; font-size:11.5px; line-height:1.9}}
 .ph h1{margin:0; font-weight:800; letter-spacing:.005em;
   font-size:clamp(27px,3.5vw,46px); line-height:1.34}
 .ph .stand{margin:20px 0 0; font-size:16px; color:var(--grey); max-width:52ch; line-height:1.95}
@@ -203,7 +206,9 @@ footer.foot a{color:var(--w)} footer.foot a:hover{color:var(--red-2)}
 footer.foot .grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr)); gap:32px}
 footer.foot h4{margin:0 0 14px; font-size:12px; font-weight:800; letter-spacing:.28em; color:#6E6E6E}
 footer.foot p{margin:0 0 8px; font-size:14px; line-height:1.9; color:#D6D6D6}
-footer.foot .bar{margin-top:clamp(32px,5vw,56px); padding-top:22px; border-top:1px solid #2C2C2C;
+footer.foot .fund{margin-top:clamp(32px,5vw,56px); padding-top:26px; border-top:1px solid #2C2C2C;
+  font-size:15px; font-weight:700; color:var(--w); letter-spacing:.12em; line-height:1.7}
+footer.foot .bar{margin-top:18px; padding-top:16px; border-top:1px solid #2C2C2C;
   font-size:12.5px; color:#7A7A7A; letter-spacing:.06em}
 
 /* ---------- 進場 ---------- */
