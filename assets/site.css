@@ -219,6 +219,8 @@ figure.plate figcaption{margin-top:14px; padding-top:12px; border-top:1px solid 
 
 /* ---------- 頁尾 ---------- */
 footer.foot{background:var(--k); color:var(--w); padding:clamp(44px,6vw,80px) 0 clamp(36px,5vw,56px)}
+/* 深色區段直接接深色頁尾時會連成一片，補一道分隔線與額外留白 */
+.sec.ink + footer.foot{border-top:1px solid #333; padding-top:clamp(52px,7vw,92px)}
 footer.foot a{color:var(--w)} footer.foot a:hover{color:var(--red-2)}
 footer.foot .grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr)); gap:32px}
 footer.foot h4{margin:0 0 14px; font-size:12px; font-weight:800; letter-spacing:.28em; color:#6E6E6E}
