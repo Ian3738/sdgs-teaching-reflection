@@ -95,8 +95,11 @@ a:hover{color:var(--red)}
 .sec.ink h2, .sec.ink a{color:var(--w)}
 .sec.ink .rule{background:#333}
 
-.lab{font-size:clamp(30px,5.6vw,68px); font-weight:800; letter-spacing:.02em; line-height:1;
-  color:#EDEDED; margin:0 0 clamp(24px,3vw,44px); text-transform:uppercase}
+/* 需高於 .sec h2（同為 0,1,1 且在其前），故加上 .sec 前綴 */
+.sec h2.lab{font-size:clamp(34px,6vw,72px); font-weight:800; letter-spacing:.01em; line-height:1;
+  color:#EDEDED; margin:0 0 clamp(22px,3vw,44px); text-transform:uppercase;
+  /* 最長的標為 DOCUMENTATION；窄螢幕下以 vw 收斂，並保留斷字作為最後防線 */
+  overflow-wrap:break-word}
 .sec h2{margin:0 0 22px; font-size:clamp(21px,2.4vw,29px); font-weight:800; letter-spacing:.02em; line-height:1.45}
 .sec h3{margin:0 0 12px; font-size:18px; font-weight:800; letter-spacing:.02em}
 .sec p{margin:0 0 18px; max-width:70ch}
@@ -177,7 +180,7 @@ figure.plate figcaption{margin-top:16px; font-size:13px; color:var(--grey); line
 .video{border:1px solid var(--rule); background:#000; position:relative; aspect-ratio:16/9}
 .video iframe{position:absolute; inset:0; width:100%; height:100%; border:0}
 .gal{display:grid; grid-template-columns:repeat(12,1fr); gap:10px}
-.g{grid-column:span 4; aspect-ratio:4/3; overflow:hidden; background:var(--wash); cursor:zoom-in; position:relative}
+.g{grid-column:span 4; min-width:0; aspect-ratio:4/3; overflow:hidden; background:var(--wash); cursor:zoom-in; position:relative}
 .g.w{grid-column:span 6; aspect-ratio:16/10}
 .g.t{grid-column:span 3; aspect-ratio:3/4}
 .g img{width:100%; height:100%; object-fit:cover; transition:transform .7s cubic-bezier(.2,.7,.2,1)}
@@ -185,7 +188,7 @@ figure.plate figcaption{margin-top:16px; font-size:13px; color:var(--grey); line
 .g .pl{position:absolute; left:0; bottom:0; background:var(--red); color:var(--w); font-size:11px;
   font-weight:800; letter-spacing:.14em; padding:6px 12px}
 @media(max-width:860px){.g,.g.w,.g.t{grid-column:span 6; aspect-ratio:4/3}}
-@media(max-width:540px){.g,.g.w,.g.t{grid-column:span 12}}
+@media(max-width:540px){.gal{grid-template-columns:1fr} .g,.g.w,.g.t{grid-column:auto}}
 
 .lb{position:fixed; inset:0; z-index:200; background:rgba(0,0,0,.95); display:none; place-items:center; padding:28px}
 .lb.on{display:grid}
@@ -207,3 +210,78 @@ footer.foot .bar{margin-top:clamp(32px,5vw,56px); padding-top:22px; border-top:1
 .js .rv{opacity:0; transform:translateY(14px); transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1)}
 .js .rv.in{opacity:1; transform:none}
 @media(prefers-reduced-motion:reduce){.js .rv{opacity:1; transform:none; transition:none}}
+
+
+/* ===========================================================
+   響應式補強
+   =========================================================== */
+
+/* 錨點捲動時避開固定標頭 */
+:target{scroll-margin-top:calc(var(--mast-h) + 16px)}
+
+/* 瀏海與圓角螢幕的安全區 */
+@supports(padding:max(0px)){
+  .shell,.mast-in,.ph-in{
+    padding-left:max(var(--pad),env(safe-area-inset-left));
+    padding-right:max(var(--pad),env(safe-area-inset-right));
+  }
+  footer.foot{padding-bottom:max(clamp(36px,5vw,56px),env(safe-area-inset-bottom))}
+}
+
+/* 觸控裝置：hover 效果無法觸發，改以點擊回饋取代，避免停在放大狀態 */
+@media(hover:none){
+  .g:hover img{transform:none}
+  .g:active img{transform:scale(1.03)}
+  .ix:hover .go{background:var(--wash); color:var(--k)}
+  .ix:hover h3{color:var(--k)}
+  .ix:active .go{background:var(--red); color:var(--w)}
+  .ix:active h3{color:var(--red)}
+  .nav a:hover,a:hover{color:inherit}
+  .nav a.on{color:var(--red)}
+}
+
+/* 行動版選單：項目多或橫向持機時仍可捲動 */
+@media(max-width:900px){
+  .nav{max-height:calc(100svh - var(--mast-h)); overflow-y:auto; -webkit-overflow-scrolling:touch}
+  .nav a{min-height:52px}
+}
+
+/* 橫向持機的矮螢幕：壓縮標頭與區段留白 */
+@media(max-height:520px) and (orientation:landscape){
+  :root{--mast-h:56px}
+  .mark{padding:10px 0}
+  .mark .zh{display:none}
+  .sec{padding:40px 0}
+  .ph-in{padding-top:28px; padding-bottom:24px}
+}
+
+/* 平板：主視覺與內文並排會過擠，改為堆疊但限制圖高 */
+@media(min-width:701px) and (max-width:1000px){
+  .ph .kv img{max-height:46svh; width:100%; object-fit:cover; object-position:center}
+}
+
+/* 手機：關鍵數字由二欄改為單欄，避免換行破碎 */
+@media(max-width:420px){
+  .figs{grid-template-columns:1fr}
+  .figs .f{border-right:0; border-bottom:1px solid var(--rule); padding:20px 0 22px}
+  .figs .f:last-child{border-bottom:0}
+  .figs span br{display:none}
+  .sec h2.lab{font-size:clamp(23px,8.4vw,34px)}
+  .find .big{font-size:44px}
+  .stage{grid-template-columns:44px minmax(0,1fr); gap:14px}
+  .stage .n{font-size:23px}
+  .ph .kv img{max-height:40svh; object-fit:cover}
+}
+
+/* 圖表在小螢幕上縮到不可讀，提示可點開放大 */
+@media(max-width:860px){
+  figure.plate{position:relative; cursor:zoom-in}
+  figure.plate::after{content:"點擊放大"; position:absolute; right:0; bottom:0;
+    background:var(--k); color:var(--w); font-size:11px; font-weight:700;
+    letter-spacing:.14em; padding:5px 10px}
+}
+
+/* 大螢幕：避免行長過長 */
+@media(min-width:1600px){
+  .sec p,.lead-p{max-width:64ch}
+}
