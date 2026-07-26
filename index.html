@@ -3,457 +3,114 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>證據，連向質疑｜師培生在知識翻新環境中的 SDGs 教學反思與調適歷程</title>
-<meta name="description" content="以認知網絡分析檢視 48 位師培生 SDGs 教學實踐後的同儕回饋結構。國立清華大學教育與學習科技學系。">
-<script>document.documentElement.className+=" js";</script>
-<style>
-:root{
-  --paper:#F3EFE6; --paper-2:#EBE5D8; --card:#FBF9F4;
-  --ink:#17160F; --ink-soft:#514D41; --ink-faint:#8A8474;
-  --rule:#D8D1BF; --accent:#1E4A3B; --accent-soft:#E4EBE5;
-  --ochre:#9C560F; --ochre-soft:#F6E9D8;
-  --serif:"Songti TC","Songti SC","STSong","Noto Serif CJK TC","Source Han Serif TC","SimSun",Georgia,serif;
-  --sans:"PingFang TC","PingFang SC","Noto Sans CJK TC","Heiti TC","Microsoft JhengHei",-apple-system,BlinkMacSystemFont,sans-serif;
-  --maxw:1180px;
-  --tex:url("assets/art/paper-light.jpg");
-  --hero-art:url("assets/art/hero-light.jpg");
-  --tex-op:.55; --plate-op:.5;
-}
-@media (prefers-color-scheme:dark){
-  :root{
-    --paper:#131208; --paper-2:#1C1A14; --card:#1A1813;
-    --ink:#F0EBDC; --ink-soft:#B4AE9B; --ink-faint:#7C7666;
-    --rule:#332F26; --accent:#7CC4A4; --accent-soft:#17251E;
-    --ochre:#E0A45C; --ochre-soft:#241B10;
-    --tex:url("assets/art/paper-dark.jpg");
-    --hero-art:url("assets/art/hero-dark.jpg");
-    --tex-op:.5; --plate-op:.35;
-  }
-}
-:root[data-theme="dark"]{
-  --paper:#131208; --paper-2:#1C1A14; --card:#1A1813;
-  --ink:#F0EBDC; --ink-soft:#B4AE9B; --ink-faint:#7C7666;
-  --rule:#332F26; --accent:#7CC4A4; --accent-soft:#17251E;
-  --ochre:#E0A45C; --ochre-soft:#241B10;
-  --tex:url("assets/art/paper-dark.jpg");
-  --hero-art:url("assets/art/hero-dark.jpg");
-  --tex-op:.5; --plate-op:.35;
-}
-:root[data-theme="light"]{
-  --paper:#F3EFE6; --paper-2:#EBE5D8; --card:#FBF9F4;
-  --ink:#17160F; --ink-soft:#514D41; --ink-faint:#8A8474;
-  --rule:#D8D1BF; --accent:#1E4A3B; --accent-soft:#E4EBE5;
-  --ochre:#9C560F; --ochre-soft:#F6E9D8;
-  --tex:url("assets/art/paper-light.jpg");
-  --hero-art:url("assets/art/hero-light.jpg");
-  --tex-op:.55; --plate-op:.5;
-}
-
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  margin:0; background:var(--paper); color:var(--ink);
-  font-family:var(--sans); font-size:17px; line-height:1.9;
-  -webkit-font-smoothing:antialiased; letter-spacing:.01em;
-  overflow-x:hidden;
-}
-/* 紙紋：由 Gemini 產生的紙面素材鋪排，固定於視窗以免捲動時浮動 */
-body::before{
-  content:""; position:fixed; inset:0; z-index:-1; pointer-events:none;
-  background-image:var(--tex); background-size:420px 420px; background-repeat:repeat;
-  opacity:var(--tex-op);
-}
-body::after{
-  content:""; position:fixed; inset:0; z-index:9999; pointer-events:none; opacity:.035;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-h1,h2,h3,.fig{font-family:var(--serif); font-weight:600; letter-spacing:.02em}
-.num{font-family:var(--serif); font-variant-numeric:tabular-nums; font-feature-settings:"tnum"}
-a{color:var(--accent); text-underline-offset:3px}
-
-/* ---------- 版面 ---------- */
-.wrap{max-width:var(--maxw); margin:0 auto; padding:0 28px}
-section{padding:96px 0; border-top:1px solid var(--rule)}
-section:first-of-type{border-top:0}
-.lede{font-size:19px; color:var(--ink-soft); max-width:62ch}
-
-.sec-head{display:grid; grid-template-columns:96px 1fr; gap:26px; align-items:baseline; margin-bottom:44px}
-.sec-num{font-family:var(--serif); font-size:13px; letter-spacing:.34em; color:var(--accent); border-top:2px solid var(--accent); padding-top:10px}
-.sec-head h2{margin:0; font-size:clamp(26px,3.4vw,38px); line-height:1.35}
-.sec-head .sub{grid-column:2; color:var(--ink-faint); font-size:15px; margin-top:6px; font-family:var(--sans)}
-@media(max-width:760px){.sec-head{grid-template-columns:1fr; gap:12px}.sec-head .sub{grid-column:1}}
-
-.body-col{display:grid; grid-template-columns:96px minmax(0,1fr); gap:26px}
-.body-col > :first-child{grid-column:2}
-@media(max-width:760px){.body-col{grid-template-columns:1fr}.body-col > :first-child{grid-column:1}}
-
-/* ---------- 側邊導覽 ---------- */
-nav.rail{position:fixed; left:24px; top:50%; transform:translateY(-50%); z-index:80; display:flex; flex-direction:column; gap:13px}
-nav.rail a{display:flex; align-items:center; gap:11px; text-decoration:none; color:var(--ink-faint); font-size:12px; letter-spacing:.12em}
-nav.rail i{display:block; width:20px; height:1.5px; background:currentColor; transition:width .3s, background .3s}
-nav.rail a span{opacity:0; transform:translateX(-6px); transition:.3s; white-space:nowrap; font-family:var(--serif)}
-nav.rail a:hover span, nav.rail a.on span{opacity:1; transform:none}
-nav.rail a.on{color:var(--accent)} nav.rail a.on i{width:34px}
-@media(max-width:1360px){nav.rail{display:none}}
-
-.theme-btn{position:fixed; right:22px; top:20px; z-index:90; border:1px solid var(--rule); background:var(--card); color:var(--ink-soft);
-  border-radius:999px; padding:7px 15px; font-size:12px; cursor:pointer; font-family:var(--serif); letter-spacing:.14em}
-
-/* ---------- HERO ---------- */
-.hero{min-height:100svh; display:flex; flex-direction:column; justify-content:flex-end; padding:104px 0 34px; border-top:0; position:relative}
-.hero::after{content:""; position:absolute; inset:auto 0 0 0; height:1px; background:var(--rule); z-index:2}
-/* 網絡圖層：置於右上，向左與向下淡出，讓標題區維持乾淨 */
-.hero-art{
-  position:absolute; z-index:0; pointer-events:none;
-  top:0; left:50%; transform:translateX(-50%); width:100vw; height:min(62svh,520px);
-  background-image:var(--hero-art); background-size:cover; background-position:right top;
-  -webkit-mask-image:linear-gradient(100deg,transparent 10%,#000 52%),linear-gradient(#000 48%,transparent 97%);
-  mask-image:linear-gradient(100deg,transparent 10%,#000 52%),linear-gradient(#000 48%,transparent 97%);
-  -webkit-mask-composite:source-in; mask-composite:intersect;
-  opacity:.9;
-}
-.hero > *:not(.hero-art){position:relative; z-index:1}
-@media(max-width:900px){.hero-art{opacity:.4; height:38svh}}
-.eyebrow{font-family:var(--serif); font-size:12.5px; letter-spacing:.4em; color:var(--accent); margin-bottom:22px}
-.hero h1{
-  font-size:clamp(44px,7.6vw,104px); line-height:1.04; margin:0 0 18px; letter-spacing:.03em;
-}
-.hero h1 .c{color:var(--ochre)}
-.hero .sub{font-size:clamp(16px,1.7vw,20px); color:var(--ink-soft); max-width:34ch; font-family:var(--serif); line-height:1.65}
-.hero .one{margin-top:16px; max-width:46ch; color:var(--ink-faint); font-size:15.5px; line-height:1.75}
-
-.stats{display:grid; grid-template-columns:repeat(3,1fr); gap:0; margin-top:32px; border-top:1px solid var(--rule)}
-.stat{padding:20px 22px 0; border-right:1px solid var(--rule)}
-.stat:last-child{border-right:0}
-.stat b{display:block; font-family:var(--serif); font-variant-numeric:tabular-nums; font-size:clamp(34px,4.4vw,52px); line-height:1; font-weight:600; letter-spacing:.01em}
-.stat span{display:block; margin-top:9px; font-size:13px; color:var(--ink-faint); letter-spacing:.06em}
-@media(max-width:700px){.stats{grid-template-columns:1fr; border-top:0}.stat{border-right:0; border-top:1px solid var(--rule); padding:20px 0 0}}
-
-/* ---------- 階段 ---------- */
-.stages{position:relative; margin:0; padding:0; list-style:none}
-.stages::before{content:""; position:absolute; left:29px; top:14px; bottom:14px; width:1px; background:var(--rule)}
-.stages li{position:relative; padding:0 0 30px 78px; min-height:60px}
-.stages li .k{position:absolute; left:0; top:-2px; width:58px; height:58px; border-radius:50%; border:1px solid var(--rule);
-  background:var(--card); display:grid; place-items:center; font-family:var(--serif); font-size:20px; color:var(--accent);
-  font-variant-numeric:tabular-nums}
-.stages li h4{margin:6px 0 5px; font-family:var(--serif); font-size:19px; font-weight:600}
-.stages li p{margin:0; color:var(--ink-soft); font-size:15.5px; max-width:56ch}
-.stages li.loop .k{border-style:dashed; color:var(--ochre)}
-
-.conds{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--rule); border:1px solid var(--rule); margin-top:56px}
-.cond{background-color:var(--card); background-image:var(--tex); background-size:420px 420px; padding:30px 26px; position:relative}
-.cond::before{content:""; position:absolute; left:0; top:0; width:3px; height:100%; background:var(--accent); opacity:.25}
-.cond h4{margin:0 0 10px; font-family:var(--serif); font-size:17.5px; color:var(--accent)}
-.cond p{margin:0; font-size:15px; color:var(--ink-soft); line-height:1.8}
-@media(max-width:800px){.conds{grid-template-columns:1fr}}
-
-/* ---------- 媒材 ---------- */
-.video-hero{margin:0 0 20px; border:1px solid var(--rule); background:#000; position:relative; aspect-ratio:16/9}
-.video-hero iframe{position:absolute; inset:0; width:100%; height:100%; border:0; display:block}
-.vcap{font-size:13.5px; color:var(--ink-faint); margin:0 0 54px; line-height:1.75}
-
-.gallery{display:grid; grid-template-columns:repeat(12,1fr); gap:14px}
-.gitem{position:relative; overflow:hidden; background:var(--paper-2); border:1px solid var(--rule); cursor:zoom-in; grid-column:span 4; aspect-ratio:4/3}
-.gitem.wide{grid-column:span 6; aspect-ratio:16/10}
-.gitem.tall{grid-column:span 3; aspect-ratio:3/4}
-.gitem img{width:100%; height:100%; object-fit:cover; display:block; transition:transform .8s cubic-bezier(.2,.7,.2,1); filter:saturate(.94)}
-.gitem:hover img{transform:scale(1.045)}
-.gitem .play{position:absolute; inset:auto 12px 12px auto; background:var(--paper); color:var(--ink); border:1px solid var(--rule);
-  font-size:11px; letter-spacing:.16em; padding:5px 11px; font-family:var(--serif)}
-@media(max-width:820px){.gitem,.gitem.wide,.gitem.tall{grid-column:span 6; aspect-ratio:4/3}}
-@media(max-width:520px){.gitem,.gitem.wide,.gitem.tall{grid-column:span 12}}
-
-.note{font-size:13.5px; color:var(--ink-faint); margin-top:20px; padding-left:16px; border-left:2px solid var(--rule)}
-
-/* ---------- 發現 ---------- */
-.find{display:grid; grid-template-columns:200px minmax(0,1fr); gap:34px; padding:40px 0; border-top:1px solid var(--rule)}
-.find:first-of-type{border-top:0; padding-top:0}
-.find .big{font-family:var(--serif); font-variant-numeric:tabular-nums; font-size:clamp(40px,5.6vw,60px); line-height:1;
-  color:var(--accent); font-weight:600}
-.find .big small{display:block; font-size:13px; letter-spacing:.08em; color:var(--ink-faint); margin-top:12px;
-  font-family:var(--sans); font-variant-numeric:normal; line-height:1.6}
-.find .rq{font-family:var(--serif); font-size:12px; letter-spacing:.26em; color:var(--ochre); margin-bottom:12px}
-.find h3{margin:0 0 12px; font-size:23px; line-height:1.5}
-.find p{margin:0; color:var(--ink-soft); font-size:16px; max-width:60ch}
-@media(max-width:760px){.find{grid-template-columns:1fr; gap:16px}}
-
-figure.plate{margin:44px 0 0; border:1px solid var(--rule); padding:22px; position:relative;
-  background-color:var(--card); background-image:var(--tex); background-size:420px 420px}
-figure.plate img{width:100%; height:auto; display:block;
-  /* 圖表為白底 PNG，以 multiply 讓紙面透出，避免頁面上出現突兀的白色方塊 */
-  mix-blend-mode:multiply}
-:root[data-theme="dark"] figure.plate img{mix-blend-mode:normal; filter:invert(.9) hue-rotate(180deg) saturate(.85)}
-@media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]) figure.plate img{mix-blend-mode:normal; filter:invert(.9) hue-rotate(180deg) saturate(.85)}
-}
-figure.plate figcaption{font-family:var(--serif); font-size:13.5px; color:var(--ink-faint); margin-top:16px; line-height:1.7; text-align:center}
-
-/* ---------- 揭露 ---------- */
-.disclose{background:var(--ochre-soft); border-top:1px solid var(--ochre); border-bottom:1px solid var(--ochre)}
-.disclose .sec-num{color:var(--ochre); border-top-color:var(--ochre)}
-.disclose h2{color:var(--ochre)}
-.disclose p{color:var(--ink); max-width:64ch; font-size:16.5px}
-
-/* ---------- 成果 ---------- */
-.out h4{font-family:var(--serif); font-size:13px; letter-spacing:.24em; color:var(--ink-faint); margin:0 0 18px; font-weight:600}
-.out ul{list-style:none; margin:0 0 44px; padding:0}
-.out li{padding:17px 0; border-top:1px solid var(--rule); font-size:15.5px; line-height:1.75}
-.out li em{display:block; font-style:normal; color:var(--ink-faint); font-size:13px; margin-top:6px; letter-spacing:.05em}
-
-footer{padding:70px 0 90px; border-top:1px solid var(--rule); color:var(--ink-faint); font-size:14.5px}
-footer .who{font-family:var(--serif); color:var(--ink); font-size:17px; line-height:2}
-footer .meta{margin-top:26px; line-height:2}
-
-/* ---------- lightbox ---------- */
-.lb{position:fixed; inset:0; z-index:200; background:rgba(10,9,6,.94); display:none; place-items:center; padding:34px}
-.lb.on{display:grid}
-.lb img,.lb video{max-width:94vw; max-height:82vh; display:block; border:1px solid #3a352a}
-.lb .cap{position:absolute; left:0; right:0; bottom:26px; text-align:center; color:#CFC8B6; font-size:13.5px; font-family:var(--serif); padding:0 30px}
-.lb .x{position:absolute; top:20px; right:26px; color:#CFC8B6; background:none; border:1px solid #4a443a; border-radius:999px;
-  width:40px; height:40px; font-size:19px; cursor:pointer}
-
-/* ---------- 進場 ---------- */
-/* 漸進增強：沒有 JS 時內容照常顯示，不依賴 IntersectionObserver */
-.js .rv{opacity:0; transform:translateY(20px); transition:opacity .85s cubic-bezier(.2,.7,.2,1), transform .85s cubic-bezier(.2,.7,.2,1)}
-.js .rv.in{opacity:1; transform:none}
-@media(prefers-reduced-motion:reduce){.js .rv{opacity:1; transform:none; transition:none} html{scroll-behavior:auto}}
-</style>
+<title>首頁｜探究教師在知識翻新環境中的整合心態與共享能動性</title>
+<meta name="description" content="探究教師在知識翻新環境中的整合心態與共享能動性｜研究成果網站">
+<link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
 
-<button class="theme-btn" id="themeBtn">深淺</button>
-
-<nav class="rail" aria-label="章節">
-  <a href="#overview"><i></i><span>研究概述</span></a>
-  <a href="#course"><i></i><span>課程設計</span></a>
-  <a href="#field"><i></i><span>教學現場</span></a>
-  <a href="#method"><i></i><span>研究方法</span></a>
-  <a href="#findings"><i></i><span>主要發現</span></a>
-  <a href="#meaning"><i></i><span>這代表什麼</span></a>
-  <a href="#disclose"><i></i><span>誠實揭露</span></a>
-  <a href="#outputs"><i></i><span>研究成果</span></a>
-</nav>
-
-<header class="hero wrap">
-  <div class="hero-art" aria-hidden="true"></div>
-  <div class="eyebrow rv">國立清華大學　教育與學習科技學系</div>
-  <h1 class="rv">證據，<br>連向<span class="c">質疑</span></h1>
-  <p class="sub rv">師培生在知識翻新環境中的 SDGs 教學反思與調適歷程</p>
-  <p class="one rv">師培生走進真實的國小教室試教，我們分析其中 48 位回校後如何互相回饋。</p>
-  <div class="stats rv">
-    <div class="stat"><b class="num">567</b><span>編碼段落</span></div>
-    <div class="stat"><b class="num">48</b><span>納入分析之師培生</span></div>
-    <div class="stat"><b class="num">10.2%</b><span>觸及學習本質的回饋</span></div>
+<header class="mast">
+  <div class="mast-in">
+    <a class="mark" href="index.html">
+      <div class="en"><span>KB</span>&nbsp;&middot;&nbsp;TEACHER AGENCY</div>
+      <div class="zh">知識翻新環境中的教師專業成長</div>
+    </a>
+    <button class="burger" aria-label="選單"><i></i><i></i><i></i></button>
+    <nav class="nav"><a href="index.html" class="on">首頁</a><a href="course.html">課程設計</a><a href="field.html">教學現場</a><a href="findings.html">研究發現</a><a href="outputs.html">研究成果</a></nav>
   </div>
 </header>
 
-<section id="overview" class="wrap">
-  <div class="sec-head rv"><div class="sec-num">壹</div><h2>研究概述</h2></div>
-  <div class="body-col rv"><p class="lede">師培生看得見學生的學習表現，也給得出改進建議，但這兩者之間是否真的接得起來？本研究以知識翻新理論為基礎，分析 48 位師培生教學實踐後的同儕互評語料，共 567 個編碼段落。研究關心的不是說了什麼，而是證據、質疑與調適如何被連在一起。三個研究問題依序處理證據的使用、社群對話的反思結構，以及調適建議的成長取向。</p></div>
-</section>
-
-<section id="course" class="wrap">
-  <div class="sec-head rv"><div class="sec-num">貳</div><h2>課程設計</h2><div class="sub">五階段循環，加上一道回饋回流</div></div>
-  <div class="body-col">
-    <div>
-      <ol class="stages rv">
-        <li><div class="k num">1</div><h4>議題與教案</h4><p>分組選定 SDGs 議題，共同設計一份要真的拿進教室的教案。</p></li>
-        <li><div class="k num">2</div><h4>真實教室試教</h4><p>進入國小現場實施教學，蒐集學生作品與學習表現。</p></li>
-        <li><div class="k num">3</div><h4>成果公開</h4><p>將教學影片與簡報上傳線上平台，成為社群可檢視的物件。</p></li>
-        <li><div class="k num">4</div><h4>課堂報告</h4><p>向全班報告教學歷程、教學觀察與教學後的反思。</p></li>
-        <li><div class="k num">5</div><h4>同儕回饋</h4><p>依提示語對該組教學提出提問與具建設性的建議。</p></li>
-        <li class="loop"><div class="k">↻</div><h4>回饋回流</h4><p>師培生依同儕回饋修正教案與教學設計，循環回到起點。五個階段與回饋回流各對應一項知識翻新原則，合計為十二項原則中的六項。</p></li>
-      </ol>
-
-      <figure class="plate rv">
-        <img src="assets/figs/module_zh.png" alt="SDGs 教學實踐與同儕反思循環之課程設計模組">
-        <figcaption>圖 1　SDGs 教學實踐與同儕反思循環之課程設計模組</figcaption>
-      </figure>
-
-      <div class="conds rv">
-        <div class="cond"><h4>教學必須真實發生</h4><p>反思要有具體的學生學習表現可依據，模擬教學無法替代。</p></div>
-        <div class="cond"><h4>產出必須公開</h4><p>把個人的教學經驗轉為社群可以檢視、質疑與改進的物件。</p></div>
-        <div class="cond"><h4>回饋必須結構化</h4><p>提示語決定回饋包含哪些認知動作，產出因而可以互相比較。</p></div>
-      </div>
-      <p class="note rv">模組的可遷移性建立在這三項條件上，而非特定議題內容。SDGs 提供的是具價值衝突與多重觀點的情境；換成社會性科學議題或在地社區議題，結構仍可運作。</p>
-    </div>
-  </div>
-</section>
-
-<section id="field" class="wrap">
-  <div class="sec-head rv"><div class="sec-num">參</div><h2>教學現場</h2></div>
-  <div class="body-col rv"><p class="lede">這些回饋語料不是作業，而是課堂真實運轉後留下的東西。師培生帶著自己設計的 SDGs 教案走進國小教室，面對真實的學生與真實的時間壓力；回到大學課堂，再把整段過程攤開來給同儕檢視。</p></div>
-
-  <div style="margin-top:44px">
-    <div class="video-hero rv">
-      <iframe src="https://www.youtube-nocookie.com/embed/HcSE4TcQCNo" title="城市裡的一堂課｜清華大學教育與學習科技 × 新竹市議會走讀" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-    </div>
-    <p class="vcap rv">〈城市裡的一堂課｜清華大學教育與學習科技 × 新竹市議會走讀〉<br>此為同一課程之校外走讀活動紀錄，並非本研究語料所來自的國小試教現場。</p>
-
-    <div class="gallery rv" id="gallery"></div>
-    <p class="note rv">影像中所有人臉與可辨識之姓名牌，均已於發布前以自動偵測方式進行去識別化處理。影像僅作為課程實施情形之說明，不作為分析資料。</p>
-  </div>
-</section>
-
-<section id="method" class="wrap">
-  <div class="sec-head rv"><div class="sec-num">肆</div><h2>研究方法</h2><div class="sub">認知網絡分析（Epistemic Network Analysis, ENA）</div></div>
-  <div class="body-col rv"><p class="lede">認知網絡分析將概念的共現關係模型化。其假設是：專業判斷的關鍵在於概念如何彼此連結，而非個別概念出現幾次。在同一受評小組的回饋情境中，當前語句會與該脈絡內所有先前語句一併納入考量；若學生證據與批判性提問在此背景下共現，兩者之間便累積一條連結。本研究以個別師培生為分析單位，把每位師培生在各個回饋脈絡中的連結累積為一個網絡（全體共七個脈絡，對應七個受評小組），48 位師培生因而形成 48 個相互獨立的網絡。</p></div>
-</section>
-
-<section id="findings" class="wrap">
-  <div class="sec-head rv"><div class="sec-num">伍</div><h2>主要發現</h2></div>
-  <div class="body-col">
-    <div>
-      <div class="find rv">
-        <div class="big num">58.2%<small>援引學生學習表現的段落比率</small></div>
-        <div>
-          <div class="rq">RQ 1</div>
-          <h3>證據很多，問題標定很少</h3>
-          <p>師培生最常援引的反思證據是學生的學習表現，出現於 58.2% 的段落，遠高於觀課紀錄等外顯觀察證據（10.8%）。然而明確指出教學預期與實際情形不一致者，僅出現於 16.8% 的段落。證據的可得性與證據的可用性是兩件事，而後者才是反思能否轉化為教學調適的關鍵。</p>
-        </div>
-      </div>
-
-      <div class="find rv">
-        <div class="big num">7／10<small>前十強連結中與學生證據相關者</small></div>
-        <div>
-          <div class="rq">RQ 2</div>
-          <h3>學生證據是網絡的結構核心</h3>
-          <p>整體平均網絡中，連結強度前十名有七項與學生證據相關，最強的一條是學生證據與具體策略建議（.271）。批判性提問出現於 34.0% 的段落，並與策略建議及學生證據相連（.256／.246），社群對話已進入對教學假設的集體檢視。情感支持普及於回饋語氣之中，卻不是網絡的樞紐。其中以學生證據為核心的結構跨七個受評小組一致出現，學生證據出現率介於 43.5% 至 67.4%，具體策略建議介於 45.3% 至 59.8%。</p>
-        </div>
-      </div>
-
-      <figure class="plate rv">
-        <img src="assets/figs/ena_mean_zh.png" alt="師培生 SDGs 教學反思之 ENA 整體平均網絡">
-        <figcaption>圖 2　師培生 SDGs 教學反思之 ENA 整體平均網絡（N = 48）</figcaption>
-      </figure>
-
-      <div class="find rv" style="margin-top:44px">
-        <div class="big num">10.2%<small>觸及學習本質檢視的回饋比率</small></div>
-        <div>
-          <div class="rq">RQ 3</div>
-          <h3>證據連向質疑，或連向安慰</h3>
-          <p>觸及學習本質的回饋僅 10.2%，調適建議多停留在教材與教法層次。48 位師培生中，27 位曾出現這個層次，21 位完全未曾。刪去全部八條與學習本質檢視相接的連結後重新建模，兩組在第一維上的位置差異均未達 .05 顯著水準（完整模型 p = .110, r = .232；非循環模型 p = .071, r = .262），惟差分網絡的方向在兩個模型中一致：曾出現組的區辨連結落在證據、批判與策略之間，未曾出現組的區辨連結則與情感支持相接。落差被察覺了，卻連向安慰而非連向修正。</p>
-        </div>
-      </div>
-
-      <figure class="plate rv">
-        <img src="assets/figs/ena_diff_zh.png" alt="差分網絡">
-        <figcaption>圖 3　差分網絡：曾出現學習本質檢視者（藍，n = 27）與未曾出現者（紅，n = 21）</figcaption>
-      </figure>
-    </div>
-  </div>
-</section>
-
-<section id="meaning" class="wrap">
-  <div class="sec-head rv"><div class="sec-num">陸</div><h2>這代表什麼</h2></div>
-  <div class="body-col rv"><p class="lede">若證據連向質疑是深層調適的結構特徵，師培課程可以做的介入就不是增加反思時數，而是改寫回饋提示語。本課程原本的兩道題只要求提問與建議，回饋者可以跳過問題的標定直接給做法。建議在原有的提問與建議之間插入落差陳述：先問觀察到哪些學生的具體表現，再問這些表現與該組的教學預期有何差異、對其教學設計假設意味著什麼，最後維持原有的「請提供一項具建設性的建議」。改寫一份表單幾乎沒有成本，卻等於由課程設計代替回饋者承擔提出質疑的責任。</p></div>
-</section>
-
-<section id="disclose" class="disclose">
-  <div class="wrap">
-    <div class="sec-head rv"><div class="sec-num">柒</div><h2>誠實揭露</h2></div>
-    <div class="body-col rv"><p>必須說明：分組依據與回饋書寫量高度混淆。曾出現學習本質檢視的一組平均產生 30.7 個編碼，未曾出現組為 20.7 個（p &lt; .001）；將分組與書寫量同時納入迴歸後，分組的效果不再顯著，書寫量則仍為顯著的預測變項；書寫量差異的效果量約為組間網絡差異的兩倍，且在書寫量相當的配對子樣本中組間差異不成立，差分網絡的型態亦隨之改變。本研究另為橫斷設計，無法確認因果方向；N = 48 檢定力有限，組間位置比較 p = .071 未達 .05；分組為二分處理，未反映程度差異。上述組間結構差異應視為探索性觀察，而非已確立的結論。</p></div>
-  </div>
-</section>
-
-<section id="outputs" class="wrap out">
-  <div class="sec-head rv"><div class="sec-num">捌</div><h2>研究成果</h2></div>
-  <div class="body-col">
+<section class="ph lead">
+  <div class="ph-in">
     <div class="rv">
-      <h4>AERA 2027 年會（已投出）</h4>
-      <ul>
-        <li>Evidence Linked to Questioning: What Distinguishes Depth in Pre-service Teachers’ Peer Feedback<em>Division K, Section 05: Pre-Service Teacher Coursework and Clinical Practice</em></li>
-        <li>Transcending Disciplinary Boundaries: Synthesizing Mind and AI-TPACK Growth Among Pre-service Teachers<em>Division C, Section 8: Technology-Mediated Learning and Instruction</em></li>
-      </ul>
-      <h4>期刊投稿規劃</h4>
-      <ul>
-        <li>本研究（反思與調適／ENA）<em>Teaching and Teacher Education（SSCI）、Journal of Teacher Education（SSCI）、Journal of Learning Analytics，以及國內 TSSCI 期刊</em></li>
-        <li>另一主題（整合心智與 AI-TPACK）<em>Journal of Science Education and Technology（SSCI）、Research and Practice in Technology Enhanced Learning（SSCI）、Computers &amp; Education: Artificial Intelligence，以及國內 TSSCI 期刊</em></li>
-      </ul>
+      <div class="kicker">研究成果網站</div>
+      <h1>探究教師在知識翻新環境中的整合心態與共享能動性</h1>
+      <p class="stand">本頁所呈現者，為本計畫項下之子研究「師培生在知識翻新環境中 SDGs 教學實踐反思與調適歷程之研究」。研究以認知網絡分析檢視 48 位師培生在真實國小教室試教後的同儕互評語料，探究反思證據、批判性提問與教學調適三者如何連結。</p>
+    </div>
+    <figure class="kv rv"><img src="assets/art/kv-home.jpg" alt=""></figure>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="shell">
+    <div class="figs rv">
+      <div class="f"><b>567</b><span>編碼段落</span></div>
+      <div class="f"><b>48</b><span>納入分析之師培生</span></div>
+      <div class="f"><b>9</b><span>編碼類別</span></div>
+      <div class="f"><b>7</b><span>回饋脈絡</span></div>
     </div>
   </div>
 </section>
 
-<footer class="wrap">
-  <div class="body-col">
-    <div class="rv">
-      <div class="who">陳美如　國立清華大學教育與學習科技學系　教授<br>陳奕安　國立清華大學教育與學習科技學系　博士生</div>
-      <div class="meta">
-        國立清華大學教育與學習科技學系　2026<br>
-        聯絡方式：［聯絡信箱待補］<br>
-        研究資料與分析程式：［連結待補］
+<section class="sec">
+  <div class="shell">
+    <h2 class="lab rv">Overview</h2>
+    <div class="cols">
+      <div class="rv">
+        <p class="lead-p">師培生看得見學生的學習表現，也給得出改進建議。但這兩者之間，是否真的接得起來？</p>
+      </div>
+      <div class="rv">
+        <p>本研究以知識翻新（Knowledge Building）理論為基礎，將反思視為社群可共同檢視、質疑與改進的對象，而非個人內省的紀錄。分析語料取自師培生在國小現場試教後，回到大學課堂互相提出的提問與建議。</p>
+        <p>研究關心的不是師培生說了什麼，而是證據、質疑與調適如何被連在一起。三個研究問題依序處理證據的使用、社群對話的反思結構，以及調適建議的成長取向。</p>
       </div>
     </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="shell">
+    <h2 class="lab rv">Contents</h2>
+    <div class="index-list rv">
+      <a class="ix" href="course.html">
+        <div class="n">01</div>
+        <div><h3>課程設計</h3><p>五階段循環模組、三項可遷移的設計條件，以及同儕回饋所使用的兩道提示語。</p></div>
+        <div class="go">→</div>
+      </a>
+      <a class="ix" href="field.html">
+        <div class="n">02</div>
+        <div><h3>教學現場</h3><p>師培生進入合作國小實施 SDGs 議題教學的影像紀錄與課程影片。</p></div>
+        <div class="go">→</div>
+      </a>
+      <a class="ix" href="findings.html">
+        <div class="n">03</div>
+        <div><h3>研究發現</h3><p>認知網絡分析的方法、三項主要發現、對師培課程設計的意涵，以及研究限制的完整揭露。</p></div>
+        <div class="go">→</div>
+      </a>
+      <a class="ix" href="outputs.html">
+        <div class="n">04</div>
+        <div><h3>研究成果</h3><p>已投稿之國際研討會論文與期刊投稿規劃。</p></div>
+        <div class="go">→</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<footer class="foot">
+  <div class="shell">
+    <div class="grid">
+      <div>
+        <h4>計畫</h4>
+        <p>探究教師在知識翻新環境中的整合心態與共享能動性</p>
+      </div>
+      <div>
+        <h4>本頁成果</h4>
+        <p>師培生在知識翻新環境中 SDGs 教學實踐反思與調適歷程之研究</p>
+      </div>
+      <div>
+        <h4>研究團隊</h4>
+        <p>陳美如　教授<br>陳奕安　博士生</p>
+      </div>
+      <div>
+        <h4>單位</h4>
+        <p>國立清華大學<br>教育與學習科技學系</p>
+      </div>
+    </div>
+    <div class="bar">2026　國立清華大學教育與學習科技學系　　影像中之人臉與姓名牌均已於發布前完成去識別化處理</div>
   </div>
 </footer>
 
-<div class="lb" id="lb"><button class="x" id="lbx" aria-label="關閉">×</button><div id="lbBody"></div><div class="cap" id="lbCap"></div></div>
-
 <script src="assets/manifest.js"></script>
-<script>
-(function(){
-  // 主題
-  var btn=document.getElementById('themeBtn');
-  btn.addEventListener('click',function(){
-    var cur=document.documentElement.getAttribute('data-theme');
-    if(!cur){cur=matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';}
-    document.documentElement.setAttribute('data-theme',cur==='dark'?'light':'dark');
-  });
-
-  // 圖庫
-  var MEDIA=(window.MEDIA||{photos:[],videos:[]});
-  var g=document.getElementById('gallery');
-  var items=[];
-  MEDIA.photos.forEach(function(p,i){items.push({type:'img',src:'assets/photos/'+p.file,cap:p.cap,size:p.size||''});});
-  MEDIA.videos.forEach(function(v){items.push({type:'video',src:'assets/video/'+v.file,poster:'assets/video/'+v.poster,cap:v.cap,size:v.size||''});});
-  items.forEach(function(it,i){
-    var d=document.createElement('div');
-    d.className='gitem '+(it.size||'');
-    var im=document.createElement('img');
-    im.src=it.type==='video'?it.poster:it.src;
-    im.alt=it.cap||''; im.loading='lazy';
-    d.appendChild(im);
-    if(it.type==='video'){var s=document.createElement('span'); s.className='play'; s.textContent='▶ 影片'; d.appendChild(s);}
-    d.addEventListener('click',function(){open(i);});
-    g.appendChild(d);
-  });
-
-  var lb=document.getElementById('lb'), body=document.getElementById('lbBody'), cap=document.getElementById('lbCap');
-  function open(i){
-    var it=items[i]; body.innerHTML='';
-    if(it.type==='video'){
-      var v=document.createElement('video'); v.src=it.src; v.controls=true; v.autoplay=true; v.playsInline=true; body.appendChild(v);
-    }else{
-      var im=document.createElement('img'); im.src=it.src; im.alt=it.cap||''; body.appendChild(im);
-    }
-    cap.textContent=it.cap||''; lb.classList.add('on');
-  }
-  function close(){lb.classList.remove('on'); body.innerHTML='';}
-  document.getElementById('lbx').addEventListener('click',close);
-  lb.addEventListener('click',function(e){if(e.target===lb)close();});
-  addEventListener('keydown',function(e){if(e.key==='Escape')close();});
-
-  // 進場
-  var io=new IntersectionObserver(function(es){
-    es.forEach(function(e,i){ if(e.isIntersecting){ setTimeout(function(){e.target.classList.add('in');}, i*70); io.unobserve(e.target);} });
-  },{rootMargin:'0px 0px -8% 0px', threshold:.06});
-  document.querySelectorAll('.rv').forEach(function(el){io.observe(el);});
-  // 保險：任何情況下 2 秒後一律顯示，避免內容因動畫卡住而看不見
-  setTimeout(function(){document.querySelectorAll('.rv:not(.in)').forEach(function(el){el.classList.add('in');});},2000);
-
-  // 導覽高亮
-  var links=[].slice.call(document.querySelectorAll('nav.rail a'));
-  var secs=links.map(function(a){return document.querySelector(a.getAttribute('href'));});
-  var so=new IntersectionObserver(function(es){
-    es.forEach(function(e){
-      if(e.isIntersecting){
-        links.forEach(function(l){l.classList.remove('on');});
-        var i=secs.indexOf(e.target); if(i>=0) links[i].classList.add('on');
-      }
-    });
-  },{rootMargin:'-45% 0px -50% 0px'});
-  secs.forEach(function(s){if(s)so.observe(s);});
-})();
-</script>
+<script src="assets/site.js"></script>
 </body>
 </html>
