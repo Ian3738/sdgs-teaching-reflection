@@ -15,6 +15,9 @@
   --serif:"Songti TC","Songti SC","STSong","Noto Serif CJK TC","Source Han Serif TC","SimSun",Georgia,serif;
   --sans:"PingFang TC","PingFang SC","Noto Sans CJK TC","Heiti TC","Microsoft JhengHei",-apple-system,BlinkMacSystemFont,sans-serif;
   --maxw:1180px;
+  --tex:url("assets/art/paper-light.jpg");
+  --hero-art:url("assets/art/hero-light.jpg");
+  --tex-op:.55; --plate-op:.5;
 }
 @media (prefers-color-scheme:dark){
   :root{
@@ -22,6 +25,9 @@
     --ink:#F0EBDC; --ink-soft:#B4AE9B; --ink-faint:#7C7666;
     --rule:#332F26; --accent:#7CC4A4; --accent-soft:#17251E;
     --ochre:#E0A45C; --ochre-soft:#241B10;
+    --tex:url("assets/art/paper-dark.jpg");
+    --hero-art:url("assets/art/hero-dark.jpg");
+    --tex-op:.5; --plate-op:.35;
   }
 }
 :root[data-theme="dark"]{
@@ -29,12 +35,18 @@
   --ink:#F0EBDC; --ink-soft:#B4AE9B; --ink-faint:#7C7666;
   --rule:#332F26; --accent:#7CC4A4; --accent-soft:#17251E;
   --ochre:#E0A45C; --ochre-soft:#241B10;
+  --tex:url("assets/art/paper-dark.jpg");
+  --hero-art:url("assets/art/hero-dark.jpg");
+  --tex-op:.5; --plate-op:.35;
 }
 :root[data-theme="light"]{
   --paper:#F3EFE6; --paper-2:#EBE5D8; --card:#FBF9F4;
   --ink:#17160F; --ink-soft:#514D41; --ink-faint:#8A8474;
   --rule:#D8D1BF; --accent:#1E4A3B; --accent-soft:#E4EBE5;
   --ochre:#9C560F; --ochre-soft:#F6E9D8;
+  --tex:url("assets/art/paper-light.jpg");
+  --hero-art:url("assets/art/hero-light.jpg");
+  --tex-op:.55; --plate-op:.5;
 }
 
 *{box-sizing:border-box}
@@ -45,8 +57,14 @@ body{
   -webkit-font-smoothing:antialiased; letter-spacing:.01em;
   overflow-x:hidden;
 }
+/* 紙紋：由 Gemini 產生的紙面素材鋪排，固定於視窗以免捲動時浮動 */
 body::before{
-  content:""; position:fixed; inset:0; z-index:9999; pointer-events:none; opacity:.05;
+  content:""; position:fixed; inset:0; z-index:-1; pointer-events:none;
+  background-image:var(--tex); background-size:420px 420px; background-repeat:repeat;
+  opacity:var(--tex-op);
+}
+body::after{
+  content:""; position:fixed; inset:0; z-index:9999; pointer-events:none; opacity:.035;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 h1,h2,h3,.fig{font-family:var(--serif); font-weight:600; letter-spacing:.02em}
@@ -82,21 +100,33 @@ nav.rail a.on{color:var(--accent)} nav.rail a.on i{width:34px}
   border-radius:999px; padding:7px 15px; font-size:12px; cursor:pointer; font-family:var(--serif); letter-spacing:.14em}
 
 /* ---------- HERO ---------- */
-.hero{min-height:100svh; display:flex; flex-direction:column; justify-content:center; padding:110px 0 70px; border-top:0; position:relative}
-.hero::after{content:""; position:absolute; inset:auto 0 0 0; height:1px; background:var(--rule)}
-.eyebrow{font-family:var(--serif); font-size:12.5px; letter-spacing:.4em; color:var(--accent); margin-bottom:30px}
+.hero{min-height:100svh; display:flex; flex-direction:column; justify-content:flex-end; padding:104px 0 34px; border-top:0; position:relative}
+.hero::after{content:""; position:absolute; inset:auto 0 0 0; height:1px; background:var(--rule); z-index:2}
+/* 網絡圖層：置於右上，向左與向下淡出，讓標題區維持乾淨 */
+.hero-art{
+  position:absolute; z-index:0; pointer-events:none;
+  top:0; left:50%; transform:translateX(-50%); width:100vw; height:min(62svh,520px);
+  background-image:var(--hero-art); background-size:cover; background-position:right top;
+  -webkit-mask-image:linear-gradient(100deg,transparent 10%,#000 52%),linear-gradient(#000 48%,transparent 97%);
+  mask-image:linear-gradient(100deg,transparent 10%,#000 52%),linear-gradient(#000 48%,transparent 97%);
+  -webkit-mask-composite:source-in; mask-composite:intersect;
+  opacity:.9;
+}
+.hero > *:not(.hero-art){position:relative; z-index:1}
+@media(max-width:900px){.hero-art{opacity:.4; height:38svh}}
+.eyebrow{font-family:var(--serif); font-size:12.5px; letter-spacing:.4em; color:var(--accent); margin-bottom:22px}
 .hero h1{
-  font-size:clamp(48px,10.5vw,132px); line-height:1.02; margin:0 0 26px; letter-spacing:.03em;
+  font-size:clamp(44px,7.6vw,104px); line-height:1.04; margin:0 0 18px; letter-spacing:.03em;
 }
 .hero h1 .c{color:var(--ochre)}
-.hero .sub{font-size:clamp(17px,2.1vw,23px); color:var(--ink-soft); max-width:30ch; font-family:var(--serif); line-height:1.7}
-.hero .one{margin-top:22px; max-width:44ch; color:var(--ink-faint); font-size:16px}
+.hero .sub{font-size:clamp(16px,1.7vw,20px); color:var(--ink-soft); max-width:34ch; font-family:var(--serif); line-height:1.65}
+.hero .one{margin-top:16px; max-width:46ch; color:var(--ink-faint); font-size:15.5px; line-height:1.75}
 
-.stats{display:grid; grid-template-columns:repeat(3,1fr); gap:0; margin-top:64px; border-top:1px solid var(--rule)}
-.stat{padding:26px 22px 0; border-right:1px solid var(--rule)}
+.stats{display:grid; grid-template-columns:repeat(3,1fr); gap:0; margin-top:32px; border-top:1px solid var(--rule)}
+.stat{padding:20px 22px 0; border-right:1px solid var(--rule)}
 .stat:last-child{border-right:0}
-.stat b{display:block; font-family:var(--serif); font-variant-numeric:tabular-nums; font-size:clamp(38px,6vw,62px); line-height:1; font-weight:600; letter-spacing:.01em}
-.stat span{display:block; margin-top:11px; font-size:13.5px; color:var(--ink-faint); letter-spacing:.06em}
+.stat b{display:block; font-family:var(--serif); font-variant-numeric:tabular-nums; font-size:clamp(34px,4.4vw,52px); line-height:1; font-weight:600; letter-spacing:.01em}
+.stat span{display:block; margin-top:9px; font-size:13px; color:var(--ink-faint); letter-spacing:.06em}
 @media(max-width:700px){.stats{grid-template-columns:1fr; border-top:0}.stat{border-right:0; border-top:1px solid var(--rule); padding:20px 0 0}}
 
 /* ---------- 階段 ---------- */
@@ -111,7 +141,8 @@ nav.rail a.on{color:var(--accent)} nav.rail a.on i{width:34px}
 .stages li.loop .k{border-style:dashed; color:var(--ochre)}
 
 .conds{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--rule); border:1px solid var(--rule); margin-top:56px}
-.cond{background:var(--paper); padding:30px 26px}
+.cond{background-color:var(--card); background-image:var(--tex); background-size:420px 420px; padding:30px 26px; position:relative}
+.cond::before{content:""; position:absolute; left:0; top:0; width:3px; height:100%; background:var(--accent); opacity:.25}
 .cond h4{margin:0 0 10px; font-family:var(--serif); font-size:17.5px; color:var(--accent)}
 .cond p{margin:0; font-size:15px; color:var(--ink-soft); line-height:1.8}
 @media(max-width:800px){.conds{grid-template-columns:1fr}}
@@ -146,8 +177,15 @@ nav.rail a.on{color:var(--accent)} nav.rail a.on i{width:34px}
 .find p{margin:0; color:var(--ink-soft); font-size:16px; max-width:60ch}
 @media(max-width:760px){.find{grid-template-columns:1fr; gap:16px}}
 
-figure.plate{margin:44px 0 0; border:1px solid var(--rule); background:var(--card); padding:22px}
-figure.plate img{width:100%; height:auto; display:block}
+figure.plate{margin:44px 0 0; border:1px solid var(--rule); padding:22px; position:relative;
+  background-color:var(--card); background-image:var(--tex); background-size:420px 420px}
+figure.plate img{width:100%; height:auto; display:block;
+  /* 圖表為白底 PNG，以 multiply 讓紙面透出，避免頁面上出現突兀的白色方塊 */
+  mix-blend-mode:multiply}
+:root[data-theme="dark"] figure.plate img{mix-blend-mode:normal; filter:invert(.9) hue-rotate(180deg) saturate(.85)}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) figure.plate img{mix-blend-mode:normal; filter:invert(.9) hue-rotate(180deg) saturate(.85)}
+}
 figure.plate figcaption{font-family:var(--serif); font-size:13.5px; color:var(--ink-faint); margin-top:16px; line-height:1.7; text-align:center}
 
 /* ---------- 揭露 ---------- */
@@ -197,6 +235,7 @@ footer .meta{margin-top:26px; line-height:2}
 </nav>
 
 <header class="hero wrap">
+  <div class="hero-art" aria-hidden="true"></div>
   <div class="eyebrow rv">國立清華大學　教育與學習科技學系</div>
   <h1 class="rv">證據，<br>連向<span class="c">質疑</span></h1>
   <p class="sub rv">師培生在知識翻新環境中的 SDGs 教學反思與調適歷程</p>
