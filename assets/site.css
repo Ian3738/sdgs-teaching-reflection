@@ -156,13 +156,14 @@ a:hover{color:var(--red)}
 .cond p{margin:0; font-size:14.5px; color:var(--grey)}
 
 /* ---------- 發現 ---------- */
-.find{border-top:2px solid var(--k); padding:clamp(30px,3.6vw,46px) 0 clamp(38px,4.4vw,58px);
+.find{--stat-w:208px; --stat-gap:clamp(22px,3.4vw,56px);
+  border-top:2px solid var(--k); padding:clamp(30px,3.6vw,46px) 0 clamp(38px,4.4vw,58px);
   border-bottom:1px solid var(--rule)}
 .find:last-of-type{border-bottom:0; padding-bottom:0}
 
 /* 數字欄固定為窄欄，避免短數字占住半個版面而留下大片空白 */
-.find-grid{display:grid; grid-template-columns:minmax(0,208px) minmax(0,1fr);
-  gap:clamp(22px,3.4vw,56px); align-items:start}
+.find-grid{display:grid; grid-template-columns:minmax(0,var(--stat-w)) minmax(0,1fr);
+  gap:var(--stat-gap); align-items:start}
 @media(max-width:860px){.find-grid{grid-template-columns:1fr; gap:4px}}
 
 .find .stat-col{position:sticky; top:calc(var(--mast-h) + 28px)}
@@ -179,6 +180,10 @@ a:hover{color:var(--red)}
 .find .find-grid > div + div > p + p{margin-top:0}
 
 figure.plate{margin:clamp(32px,4.4vw,56px) 0 0; padding:0}
+/* 發現區塊內的圖表：與文字欄對齊，並限制寬度。
+   ENA 圖原生寬度為 1031 與 1063 px，上限 760px 可避免放大而失真。 */
+.find > figure.plate{margin-left:calc(var(--stat-w) + var(--stat-gap)); max-width:760px}
+@media(max-width:860px){.find > figure.plate{margin-left:0; max-width:100%}}
 figure.plate img{width:100%; border:1px solid var(--rule)}
 figure.plate figcaption{margin-top:14px; padding-top:12px; border-top:1px solid var(--rule);
   font-size:12.5px; color:var(--grey); line-height:1.75; letter-spacing:.03em; max-width:44em}
